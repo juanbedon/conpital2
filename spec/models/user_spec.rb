@@ -1,38 +1,5 @@
 require 'rails_helper'
 
-RSpec.describe Expense, type: :model do
-  context "The expense exists" do
-  	it "should belong to an user" do
-  	  time = Time.now.freeze
-  	  user = User.create(email: Faker::Internet.email, password: Faker::Internet.password(6))
-  	  expense = Expense.new(amount: 30000, concept: "Uber", date: time, user: user)
-
-  	  expect (expense.valid?).to eq(true)
-  	  expect (expense.save!).to eq(true)
-  	  expect (Expense.count).to eq(1)
-  	  expect (user.expenses).to eq([expense])
-  	  expect (expense.user).to eq(user)
-  	end
-
-  	context "amount related" do
-      before do
-      	time = Time.now.freeze
-      	user = User.create(email: Faker::Internet.email, password: Faker::Internet.password(6))
-      	@expense = Expense.new(amount: 0, concept: "Uber", date: time, user: user)
-  	  end
-
-	  context "the amount is negative" do
-	    it "should not save the expense" do
-	      @expense.amount = -200
-	      expect(@expense.valid?).to be_falsey
-	      expect(@expense.save).to be_falsey
-	    end
-	  end
-
-      context "the amount is positive" do
-        it "should save the expense" do
-        end
-       end
-    end
-  end
+Rspec.describe User, type: :model do
+  pending "add some examples to (or delete) #{__FILE__}"
 end
