@@ -1,5 +1,6 @@
 class Expense < ApplicationRecord
   belongs_to :user
+  belongs_to :category
 
   validates :user_id, presence: true
   validates :amount, numericality: { greater_than: 0 }
@@ -8,7 +9,7 @@ class Expense < ApplicationRecord
 
   def date_cant_be_nil
   	if self.date.nil?
-  		self.date = Time.now
+  	  self.date = Time.now
   	end
   end
   
