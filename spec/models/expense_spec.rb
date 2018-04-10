@@ -5,20 +5,24 @@ RSpec.describe Expense, type: :model do
   	it "should belong to an user" do
   	  time = Time.now.freeze
   	  user = User.create(email: Faker::Internet.email, password: Faker::Internet.password(6))
-  	  expense = Expense.new(amount: 30000, concept: "Uber", date: time, user: user)
+      @category = FactoryBot.create(:category)
+      @transaction_type = FactoryBot.create(:transaction_type)
+  	  expense = Expense.new(amount: 30000, concept: "Uber", date: time, user: user, category: @category, transaction_type: @transaction_type)
 
-  	  expect (expense.valid?).to eq(true)
-  	  expect (expense.save!).to eq(true)
-  	  expect (Expense.count).to eq(1)
-  	  expect (user.expenses).to eq([expense])
-  	  expect (expense.user).to eq(user)
+  	  expect(expense.valid?).to eq(true)
+  	  expect(expense.save!).to eq(true)
+  	  expect(Expense.count).to eq(1)
+  	  expect(user.expenses).to eq([expense])
+  	  expect(expense.user).to eq(user)
   	end
 
   	context "amount related" do
       before do
       	time = Time.now.freeze
       	user = User.create(email: Faker::Internet.email, password: Faker::Internet.password(6))
-      	@expense = Expense.new(amount: 0, concept: "Uber", date: time, user: user)
+        @category = FactoryBot.create(:category)
+        @transaction_type = FactoryBot.create(:transaction_type)
+      	@expense = Expense.new(amount: 0, concept: "Uber", date: time, user: user, category: @category, transaction_type: @transaction_type)
   	  end
 
 	  context "the amount is negative" do
@@ -26,7 +30,7 @@ RSpec.describe Expense, type: :model do
 	      @expense.amount = -200
 	      expect(@expense.valid?).to be_falsey
 	      expect(@expense.save).to be_falsey
-        expect(@expense_1.errors.messages).not_to be_empty
+        expect(@expense.errors.messages).not_to be_empty
 	    end
 	  end
 
@@ -35,7 +39,7 @@ RSpec.describe Expense, type: :model do
           @expense.amount = 20000
           expect(@expense.valid?).to be_truthy
           expect(@expense.save).to be_truthy
-          expect (@expense.errors.messages).to be_empty
+          expect(@expense.errors.messages).to be_empty
         end
        end
     end
@@ -44,7 +48,9 @@ RSpec.describe Expense, type: :model do
       before do
         time = Time.now.freeze
         user = User.create!(email: Faker::Internet.email, password: Faker::Internet.password(6))
-        @expense = Expense.new(amount:20000, date: time, user: user_1)
+        @category = FactoryBot.create(:category)
+        @transaction_type = FactoryBot.create(:transaction_type)
+        @expense = Expense.new(amount:20000, date: time, user: user, category: @category, transaction_type: @transaction_type)
       end
 
       context "the concept is empty" do
@@ -69,7 +75,9 @@ RSpec.describe Expense, type: :model do
     context "date related" do
       before do
         user = User.create!(email: Faker::Internet.email, password: Faker::Internet.password(6))
-        @expense = Expense.new(amount: 20000, concept: "Uber", user: user_1)
+        @category = FactoryBot.create(:category)
+        @transaction_type = FactoryBot.create(:transaction_type)
+        @expense = Expense.new(amount: 20000, concept: "Uber", user: user, category: @category, transaction_type: @transaction_type)
       end
 
       context "the date is empty" do
@@ -91,5 +99,61 @@ RSpec.describe Expense, type: :model do
         end
       end
     end
+
+    context "category related" do
+      before do
+        time = Time.now.freeze
+        user = User.create!(email: Faker::Internet.email, password: Faker::Internet.password(6))
+        @category = FactoryBot.create(:category)
+        @transaction_type = FactoryBot.create(:transaction_type)
+        @expense = Expense.new(amount: 20000, concept: "Uber", user: user, transaction_type: @transaction_type)
+      end
+
+      context "the expense has a category" do
+        it "should save the expense" do
+          @expense.category = @category
+          expect(@expense.valid?).to be_truthy
+          expect(@expense.save).to be_truthy
+          expect(@expense.errors.messages).to be_empty
+        end
+      end
+
+      context "category not there" do
+        it "should not save the expense" do
+          expect(@expense.valid?).to be_falsey
+          expect(@expense.save).to be_falsey
+          expect(@expense.errors).not_to be_empty
+       end
+     end
+    end
+
+    context "transaction_type related" do
+      before do
+        time = Time.now.freeze
+        user = User.create!(email: Faker::Internet.email, password: Faker::Internet.password(6))
+        @category = FactoryBot.create(:category)
+        @transaction_type = FactoryBot.create(:transaction_type)
+        @expense = Expense.new(amount: 20000, concept: "Uber", user: user, category: @category)    
+      end
+
+      context "the expense has a transaction_type" do
+        it "should save the expense" do
+          @expense.transaction_type = @transaction_type
+          expect(@expense.valid?).to be_truthy
+          expect(@expense.save).to be_truthy
+          expect(@expense.errors.messages).to be_empty
+        end
+      end
+
+      context "transaction_type not there" do
+        it "should not save the expense" do
+          expect(@expense.valid?).to be_falsey
+          expect(@expense.save).to be_falsey
+          expect(@expense.errors).not_to be_empty
+       end
+     end
+      
+    end
+
   end
 end
