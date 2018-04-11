@@ -1,11 +1,11 @@
+require 'spec_helper'
+require 'faker'
 ENV['RAILS_ENV'] ||= 'test'
 require File.expand_path('../../config/environment', __FILE__)
 
 abort("The Rails environment is running in production mode!") if Rails.env.production?
 
 require 'rspec/rails'
-require 'spec_helper'
-require 'faker'
 require 'capybara/rspec'
 
 ActiveRecord::Migration.maintain_test_schema!
@@ -37,4 +37,12 @@ RSpec.configure do |config|
   config.after(:each) do
     DatabaseCleaner.clean
   end
+
+  config.include Capybara::DSL
+
+  Capybara.register_driver :selenium_chrome do |app|
+    Capybara::Selenium::Driver.new(app, browser: :chrome)
+  end
+  Capybara.javascript_driver = :selenium_chrome
+
 end
