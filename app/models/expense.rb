@@ -10,6 +10,18 @@ class Expense < ApplicationRecord
   validates :concept, presence: true
   validate :date_cant_be_nil  
 
+  scope :for_category_and_amount, -> (_category, _amount){joins(:category).where("categories.name = ? and expenses.amount < ?", _category, _amount)}
+  def self.total_spent_by_user
+    select(:amount).where(user_id:1).pluck(:amount).sum    
+  end
+
+  scope :last_six_months, -> {where("date >= ?", 6.months.ago)}
+  #Este es con ActiveRecord, el siguiente es con SQL: scope :this_month, -> {where(date: DateTime.now.beginning_of_month..DateTime.now.end_of_month)}
+  scope :this_month, -> {where('date > ? and date < ? ', Time.now.beginning_of_month, Time.now.end_of_month )}
+  scope :by_category, -> (category) {joins(:category).where("categories.name = ?", category)}
+  scope :accumulated, -> 
+
+
   def date_cant_be_nil
   	if self.date.nil?
   	  self.date = Time.now
