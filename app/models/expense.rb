@@ -8,7 +8,7 @@ class Expense < ApplicationRecord
   validates :transaction_type, presence: true
   validates :amount, numericality: { greater_than: 0 }
   validates :concept, presence: true
-  validate :date_cant_be_nil  
+  before_create :date_cant_be_nil  
 
   scope :for_category_and_amount, -> (_category, _amount){joins(:category).where("categories.name = ? and expenses.amount < ?", _category, _amount)}
   def self.total_spent_by_user
@@ -19,7 +19,9 @@ class Expense < ApplicationRecord
   #Este es con ActiveRecord, el siguiente es con SQL: scope :this_month, -> {where(date: DateTime.now.beginning_of_month..DateTime.now.end_of_month)}
   scope :this_month, -> {where('date > ? and date < ? ', Time.now.beginning_of_month, Time.now.end_of_month )}
   scope :by_category, -> (category) {joins(:category).where("categories.name = ?", category)}
-  scope :accumulated, -> 
+  #scope :accumulated, -> 
+
+  scope :daily_expenses, -> { where("date >= ?", 1.day.ago.end_of_day)}
 
 
   def date_cant_be_nil
