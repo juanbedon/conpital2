@@ -10,15 +10,19 @@ class DashboardHandler
   end
 
   def amount_of_yesterday
+  	@expenses.last_day_expenses.pluck(:amount).sum
   end
 
   def amount_of_current_month
+  	@expenses.this_month.pluck(:amount).sum
   end
 
   def amount_of_last_month
+  	@expenses.last_month.pluck(:amount).sum
   end
 
   def last_six_months_expenses_transaction_type_overview
+  	@expenses.last_six_months
   end
 
   def current_month_expenses_by_transaction_type

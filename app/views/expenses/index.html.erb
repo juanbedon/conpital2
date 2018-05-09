@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  	<meta charset="utf-8">
+  	<meta lang="es"></meta>
+
+    <title>Conpital</title>
+    
+  </head>
+  <body class="full">
+
+  <!-- Inicio Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <a class="navbar-brand" href="/">Conpital</a>
+
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+          <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+            <li class="nav-item">
+              <a class="nav-link" href="dashboard">Dashboard</a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="expenses">Expenses<span class="sr-only">(current)</span></a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  <!-- Fin Navbar -->
+
+    <div class="container">
+      <div class="row">
+
+      <!-- Inicio Filtros -->
+        <div class="col-3">
+          <h5 class="filter-name">Transaction Type</h5>
+          <p>Select to filter</p>
+          <div class="list-group">
+            <a class="list-group-item list-group-item-action list-group-item-dark transaction-type" id="purchase">Purchase</a>
+            <a class="list-group-item list-group-item-action list-group-item-dark transaction-type" id="withdrawal">Withdrawal</a>
+            <a class="list-group-item list-group-item-action list-group-item-dark transaction-type" id="transfer">Transfer</a>
+            <a class="list-group-item list-group-item-action list-group-item-dark transaction-type" id="payment">Payment</a>
+          </div>
+
+          <h5 class="filter-name">Category</h5>
+          <p>Select to filter</p>
+          <div class="list-group">
+            <a href="#" class="list-group-item list-group-item-action list-group-item-dark category" id="restaurant">Restaurant</a>
+            <a href="#" class="list-group-item list-group-item-action list-group-item-dark category" id="grocery">Grocery</a>
+            <a href="#" class="list-group-item list-group-item-action list-group-item-dark category" id="car">Car</a>
+            <a href="#" class="list-group-item list-group-item-action list-group-item-dark category" id="services">Services</a>
+            <a href="#" class="list-group-item list-group-item-action list-group-item-dark category" id="home">Home</a>
+            <a href="#" class="list-group-item list-group-item-action list-group-item-dark category" id="education">Education</a>
+            <a href="#" class="list-group-item list-group-item-action list-group-item-dark category" id="fun">Fun</a>
+            <a href="#" class="list-group-item list-group-item-action list-group-item-dark category" id="travel">Travel</a>
+          </div>
+        </div>
+      <!-- Fin Filtros -->
+
+      <!-- Inicio Resumen -->
+        <div class="col-9 resumen text-center">
+          <div class="row">
+            <h5 class="col">$123.123.123 COP</h5>
+            <h5 class="col">30</h5>
+            <h5 class="col">$1231.123.123 COP</h5>
+          </div>
+          <div class="row">
+            <p class="col">TOTAL</p>
+            <p class="col">TRANSACTIONS</p>
+            <p class="col">AVERAGE</p>
+          </div>
+        
+      <!-- Fin Resumen -->
+
+      <!-- Inicio Botón -->
+          <div class="row">
+            <div class="">
+              <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#exampleModal"><strong>+</strong> New Expense</button>
+            </div>
+      <!-- Fin Botón -->
+
+      <!-- Inicio Dropdown Mes -->
+            <div class="row">
+              <div class="container">
+                <div class="dropdown">
+                  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Month</button>
+                  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" href="#">Action</a>
+                    <a class="dropdown-item" href="#">Another action</a>
+                    <a class="dropdown-item" href="#">Something else here</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        <!--Fin Dropdown Mes -->
+
+      <!-- Inicio Datos -->
+          <table class="col table table-striped">
+            <thead>
+              <tr>
+                <th scope="col">Day</th>
+                <th scope="col">Concept</th>
+                <th scope="col">Category</th>
+                <th scope="col">Amount</th>
+                <th scope="col">Transaction Type</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <% @expenses.each do |expense| %>
+                <td><%= expense.date.strftime("%d %a") %></td>
+                <td><%= expense.concept %></td>
+                <td><%= expense.category.name %></td>
+                <td><%= number_to_currency(expense.amount) %></td>
+                <td><%= expense.transaction_type.name %></td>
+              </tr>
+            </tbody>
+              <% end %>
+          </table>
+        </div>
+      <!-- Fin Datos -->
+      </div>
+    </div>
+
+    <script>
+
+      // Inicio Filtro Transaction Type //
+        $(document).ready(function() {
+          $(".transaction-type").on('click', function(e) {
+            var filter = this.id;
+            var param = { "transaction_type": filter };
+            e.preventDefault();
+            $.ajax({
+              type: "GET",
+              url: "/expenses.js",
+              dataType: 'html',
+              data: param,
+              success: function(response) {
+                $("body").empty();
+                $("body").html(response);
+              }
+            });
+          });
+      // Fin Filtro Transaction Type //
+
+      // Inicio Filtro Category //
+          $(".category").on('click', function(e) {
+            var filter = this.id;
+            var param = { "category": filter };
+            e.preventDefault();
+            $.ajax({
+              type: "GET",
+              url: "/expenses.js",
+              dataType: 'html',
+              data: param,
+              success: function(response) {
+                $("body").empty();
+                $("body").html(response);
+              }
+            });
+          });
+        });
+      // Fin Filtro Category //
+
+    </script>
+
+    <!-- Inicio Modal -->
+      <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title" id="exampleModalLabel">Expense</h4>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+              <button type="button" class="btn btn-primary">Create Expense</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    <!-- Fin Modal -->
+
+  </body>
+</html>
