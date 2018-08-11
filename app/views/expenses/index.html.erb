@@ -63,9 +63,9 @@
       <!-- Inicio Resumen -->
         <div class="col-9 resumen text-center">
           <div class="row">
-            <h5 class="col">$123.123.123 COP</h5>
-            <h5 class="col">30</h5>
-            <h5 class="col">$1231.123.123 COP</h5>
+            <h5 class="col"><%= number_to_currency(@expenses.sum(:amount))%> COP</h5>
+            <h5 class="col"><%= @expenses.count %></h5>
+            <h5 class="col"><%= number_to_currency(@expenses.sum(:amount) / @expenses.size.to_f) %> COP</h5>
           </div>
           <div class="row">
             <p class="col">TOTAL</p>
