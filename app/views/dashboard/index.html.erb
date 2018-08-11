@@ -79,86 +79,96 @@
       animationEnabled: true,
       theme: "dark2",
       title:{
-        text: ""
+        text: "",
+        fontFamily: "arial black",
+        fontColor: "#695A42"
       },
       axisX: {
-        interval: 1,
-        intervalType: "year",
-        valueFormatString: "YYYY"
+        interval: 12,
+        intervalType: "month"
       },
-      axisY: {
-        suffix: "%"
+      axisY:{
+        valueFormatString:"0",
+        gridColor: "#B6B1A8",
+        tickColor: "#B6B1A8"
       },
       toolTip: {
-        shared: true
-      },
-      legend: {
-        reversed: false,
-        verticalAlign: "bottom",
-        horizontalAlign: "center"
+        shared: true,
+        content: toolTipContent
       },
       data: [{
-        type: "stackedColumn100",
+        type: "stackedColumn",
+        showInLegend: true,
+        color: "#17a2b8",
         name: "Purchases",
-        showInLegend: true,
-        xValueFormatString: "MMMDD",
-        yValueFormatString: "#,##0\"%\"",
         dataPoints: [
-          { x: new Date(2010,0), y: 40 },
-          { x: new Date(2011,0), y: 50 },
-          { x: new Date(2012,0), y: 60 },
-          { x: new Date(2013,0), y: 61 },
-          { x: new Date(2014,0), y: 63 },
-          { x: new Date(2015,0), y: 65 }
+          { y: 6.75, x: new Date(2010,0) },
+          { y: 8.57, x: new Date(2011,0) },
+          { y: 10.64, x: new Date(2012,0) },
+          { y: 13.97, x: new Date(2013,0) },
+          { y: 13.97, x: new Date(2014,0) },
+          { y: 15.97, x: new Date(2015,0) }
         ]
-      }, 
-      {
-        type: "stackedColumn100",
-        name: "Withdrawals",
-        showInLegend: true,
-        xValueFormatString: "YYYY",
-        yValueFormatString: "#,##0\"%\"",
-        dataPoints: [
-          { x: new Date(2010,0), y: 28 },
-          { x: new Date(2011,0), y: 18 },
-          { x: new Date(2012,0), y: 12 },
-          { x: new Date(2013,0), y: 10 },
-          { x: new Date(2014,0), y: 10 },
-          { x: new Date(2015,0), y: 7 }
-        ]
-      }, 
-      {
-        type: "stackedColumn100",
-        name: "Transfers",
-        showInLegend: true,
-        xValueFormatString: "YYYY",
-        yValueFormatString: "#,##0\"%\"",
-        dataPoints: [
-          { x: new Date(2010,0), y: 15 },
-          { x: new Date(2011,0), y: 12 },
-          { x: new Date(2012,0), y: 10 },
-          { x: new Date(2013,0), y: 9 },
-          { x: new Date(2014,0), y: 7 },
-          { x: new Date(2015,0), y: 5 }
-        ]
-      },
-      {
-        type: "stackedColumn100",
-        name: "Payments",
-        showInLegend: true,
-        xValueFormatString: "YYYY",
-        yValueFormatString: "#,##0\"%\"",
-        dataPoints: [
-          { x: new Date(2010,0), y: 17 },
-          { x: new Date(2011,0), y: 20 },
-          { x: new Date(2012,0), y: 18 },
-          { x: new Date(2013,0), y: 20 },
-          { x: new Date(2014,0), y: 20 },
-          { x: new Date(2015,0), y: 23 }
-        ]
+        },
+        {        
+          type: "stackedColumn",
+          showInLegend: true,
+          name: "Withdrawals",
+          color: "#dc3545",
+          dataPoints: [
+            { y: 6.82, x: new Date(2010,0) },
+            { y: 9.02, x: new Date(2011,0) },
+            { y: 11.80, x: new Date(2012,0) },
+            { y: 14.11, x: new Date(2013,0) },
+            { y: 74.11, x: new Date(2014,0) },
+            { y: 34.11, x: new Date(2015,0) },
+          ]
+        },
+        {        
+          type: "stackedColumn",
+          showInLegend: true,
+          name: "Transfers",
+          color: "#6f42c1",
+          dataPoints: [
+            { y: 7.28, x: new Date(2010,0) },
+            { y: 9.72, x: new Date(2011,0) },
+            { y: 13.30, x: new Date(2012,0) },
+            { y: 14.9, x: new Date(2013,0) },
+            { y: 91.9, x: new Date(2014,0) },
+            { y: 84.9, x: new Date(2015,0) }
+          ]
+        },
+        {        
+          type: "stackedColumn",
+          showInLegend: true,
+          name: "Payments",
+          color: "#28a745",
+          dataPoints: [
+            { y: 8.44, x: new Date(2010,0) },
+            { y: 10.58, x: new Date(2011,0) },
+            { y: 14.41, x: new Date(2012,0) },
+            { y: 16.86, x: new Date(2013,0) },
+            { y: 61.86, x: new Date(2014,0) },
+            { y: 56.86, x: new Date(2015,0) }
+          ]
       }]
     });
     chart.render();
+
+    function toolTipContent(e) {
+      var str = "";
+      var total = 0;
+      var str2, str3;
+      for (var i = 0; i < e.entries.length; i++){
+        var  str1 = "<span style= \"color:"+e.entries[i].dataSeries.color + "\"> "+e.entries[i].dataSeries.name+"</span>: $<strong>"+e.entries[i].dataPoint.y+"</strong>bn<br/>";
+        total = e.entries[i].dataPoint.y + total;
+        str = str.concat(str1);
+      }
+      str2 = "<span style = \"color:DodgerBlue;\"><strong>"+(e.entries[0].dataPoint.x).getFullYear()+"</strong></span><br/>";
+      total = Math.round(total * 100) / 100;
+      str3 = "<span style = \"color:Tomato\">Total:</span><strong> $"+total+"</strong>bn<br/>";
+      return (str2.concat(str)).concat(str3);
+    }
   // Fin Last 6 months //
 
   // Inicio By day //
