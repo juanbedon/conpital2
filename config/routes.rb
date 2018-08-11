@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
 
   resources :dashboard, only: [:index]
-  resources :expenses, only: [:index]
+  resources :expenses
 
   root 'dashboard#index'
 
