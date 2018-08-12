@@ -29,22 +29,8 @@ class ExpensesController < ApplicationController
 
   def new
 
-    transaction_type = params["transaction_type"]
-    category = params[:category]
-
-    if transaction_type && !category
-      @expenses = Expense.joins(:transaction_type).where("transaction_types.name = ?", transaction_type.capitalize)
-    elsif category && !transaction_type
-      @expenses = Expense.joins(:category).where("categories.name = ?", category.capitalize)
-    elsif category && transaction_type
-      @expenses = Expense.joins(:transaction_type, :category).where("transaction_types.name = ? AND categories.name = ?",
-      transaction_type.capitalize, category.capitalize)
-    else
-      @expense = Expense.new
-    end
-
-    @transaction_types = TransactionType.all
-    @category = Category.all
+    byebug
+    @expenses = Expense.new
 
   end
 

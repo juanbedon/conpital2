@@ -78,7 +78,9 @@
       <!-- Inicio Botón -->
           <div class="row">
             <div class="">
-              <button type="button" id="test" class="btn btn-secondary" data-toggle="modal" data-target="#exampleModal"><%= link_to new_expense_path, remote: true %></button>
+              <%= link_to new_expense_path , remote: true , :class => "btn btn-success pull-left"  do %>
+                New Expense
+              <% end %>
             </div>
       <!-- Fin Botón -->
 
@@ -179,7 +181,7 @@
               </button>
             </div>
             <div class="modal-body">
-
+              <p>This is a modal</p>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
