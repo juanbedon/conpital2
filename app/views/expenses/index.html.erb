@@ -181,60 +181,13 @@
               </button>
             </div>
             <div class="modal-body bg-dark">
-              <form>
-                <div class="form-row">
-                  <div class="col">
-                    <div class="form-group">
-                      <label for="exampleFormControlSelect1">Type</label>
-                      <select class="form-control" id="exampleFormControlSelect1">
-                        <option>Purchase</option>
-                        <option>Withdrawal</option>
-                        <option>Transfer</option>
-                        <option>Payment</option>
-                      </select>
-                    </div>
-                  </div>
-                  <div class="col">
-                    <div class="form-group">
-                      <label for="example-date-input">Date</label>
-                        <input class="form-control" type="date" value=<%= Time.now %> id="example-date-input">                  
-                    </div>
-                  </div>
-                </div>
-
-                <div class="form-group">
-                  <label for="concept-input">Concept</label>
-                  <input class="form-control" type="text" id="concept-input">
-                </div>
-
-                <div class="form-row">
-                  <div class="col">
-                    <div class="form-group">
-                      <label for="exampleFormControlSelect1">Category</label>
-                      <select class="form-control" id="exampleFormControlSelect1">
-                        <option>Restaurant</option>
-                        <option>Grocery</option>
-                        <option>Car</option>
-                        <option>Services</option>
-                        <option>Home</option>
-                        <option>Education</option>
-                        <option>Fun</option>
-                        <option>Travel</option>
-                      </select>
-                    </div>
-                  </div>
-                  <div class="col">
-                    <div class="form-group">
-                      <label for="example-number-input">Amount</label>
-                      <input class="form-control" type="number" value="0" id="example-number-input">
-                    </div>
-                  </div>
-                </div>
-              </form>
+              <%= render 'form' %>
             </div>
             <div class="modal-footer bg-dark">
               <button type="button" class="btn btn-danger font-weight-bold" data-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary font-weight-bold">Create expense</button>
+              <%= link_to expenses_path , remote: true , method: :post, :class => "btn btn-success pull-left"  do %>
+                Create Expense
+              <% end %>
             </div>
           </div>
         </div>

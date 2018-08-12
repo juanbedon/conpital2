@@ -28,8 +28,25 @@ class ExpensesController < ApplicationController
   end
 
   def new
-    @expenses = Expense.new
+    @expense = Expense.new
   end
 
+  def create
+
+    @expense = Expense.new(expense_params)
+    
+    if @question.save
+      redirect_to expenses_path, notice: 'Your expense was submitted successfully!'
+    else
+      render :new
+    end
+
+  end
+
+  private
+
+    def expense_params
+      params.require(:expense).permit(:transaction_type, :date, :concept, :category, :amount)
+    end
 
 end
