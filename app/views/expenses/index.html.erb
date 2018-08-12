@@ -181,13 +181,10 @@
               </button>
             </div>
             <div class="modal-body bg-dark">
-              <%= render 'form' %>
+              
             </div>
             <div class="modal-footer bg-dark">
               <button type="button" class="btn btn-danger font-weight-bold" data-dismiss="modal">Close</button>
-              <%= link_to expenses_path , remote: true , method: :post, :class => "btn btn-success pull-left"  do %>
-                Create Expense
-              <% end %>
             </div>
           </div>
         </div>

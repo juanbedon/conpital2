@@ -32,10 +32,10 @@ class ExpensesController < ApplicationController
   end
 
   def create
-
+    byebug
     @expense = Expense.new(expense_params)
     
-    if @question.save
+    if @expense.save
       redirect_to expenses_path, notice: 'Your expense was submitted successfully!'
     else
       render :new
@@ -46,7 +46,7 @@ class ExpensesController < ApplicationController
   private
 
     def expense_params
-      params.require(:expense).permit(:transaction_type, :date, :concept, :category, :amount)
+      params.require(:expense).permit(:transaction_type_id, :date, :concept, :category_id, :amount)
     end
 
 end
