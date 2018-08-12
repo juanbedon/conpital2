@@ -32,7 +32,7 @@ class ExpensesController < ApplicationController
   end
 
   def create
-    byebug
+    
     @expense = Expense.new(expense_params)
     
     if @expense.save
@@ -42,6 +42,7 @@ class ExpensesController < ApplicationController
     end
 
   end
+
 
   private
 
