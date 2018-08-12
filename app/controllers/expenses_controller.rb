@@ -28,10 +28,7 @@ class ExpensesController < ApplicationController
   end
 
   def new
-
-    byebug
     @expenses = Expense.new
-
   end
 
 
