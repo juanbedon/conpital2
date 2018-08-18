@@ -1,3 +1,18 @@
+# == Schema Information
+#
+# Table name: expenses
+#
+#  id                  :bigint(8)        not null, primary key
+#  amount              :float            not null
+#  concept             :string           not null
+#  date                :datetime         not null
+#  user_id             :bigint(8)        not null
+#  created_at          :datetime         not null
+#  updated_at          :datetime         not null
+#  category_id         :bigint(8)
+#  transaction_type_id :bigint(8)
+#
+
 class Expense < ApplicationRecord
   belongs_to :user
   belongs_to :category

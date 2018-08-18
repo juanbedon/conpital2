@@ -38,7 +38,7 @@ class ExpensesController < ApplicationController
     if @expense.save
       redirect_to expenses_path, notice: 'Your expense was submitted successfully!'
     else
-      render :new
+      redirect_to expenses_path, notice: 'Your expense was not submitted!'
     end
 
   end
