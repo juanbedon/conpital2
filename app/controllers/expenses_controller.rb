@@ -42,9 +42,30 @@ class ExpensesController < ApplicationController
       redirect_to expenses_path, notice: 'Your expense was submitted successfully!'
     else
       redirect_to expenses_path, notice: 'Your expense was not submitted!'
+      render json: { errors: expense.errors }, status: 422
     end
 
   end
+
+  def update
+
+    expense = Expense.find(params[:id])
+    if expense.update(expense_params)
+      render json: expense
+    else
+      render json: { errors: expense.errors }, status: 422
+    end
+
+  end
+
+    def destroy
+
+      expense = Expense.find(params[:id])
+      expense.destroy
+  ​
+      head :no_content
+
+    end
 
 
   private
