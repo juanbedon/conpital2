@@ -38,6 +38,7 @@ gem 'bootstrap', '~> 4.0.0'
 gem 'jquery-rails'
 gem 'faker'
 gem 'annotate'
+gem 'httparty', '~> 0.13.7'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
