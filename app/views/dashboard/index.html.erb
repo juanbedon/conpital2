@@ -6,7 +6,11 @@
 
     <title>Conpital</title>
     
-    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+    <!--<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>-->
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
   </head>
   <body class="full">
 
@@ -57,20 +61,30 @@
     <div class="container">
       <div class="row">
 
-        <h6 class="col title">Last 6 months<div id="chartContainer1" style="height: 300px; width: 100%;display: inline-block;"></div></h6>
+        <h6 class="col title">Last 6 months
+          <div id="chartOne" style="height: 300px; width: 100%; display: inline-block"></div>
+          <span class="d-block text-center"><span class="blue">Purchases</span> — <span class="red">Withdrawals</span> — <span class="purple">Transfers</span> — <span class="green">Payments</span></span>
+        </h6>
 
        
-        <h6 class="col title">By day<div id="chartContainer2" style="height: 300px; width: 100%;display: inline-block;"></div></h6>
-
+        <h6 class="col title">By day
+          <div id="chartTwo" style="height: 300px; width: 100%; display: inline-block"></div>
+          <span class="d-block text-center"><span class="blue">Purchases</span> — <span class="red">Withdrawals</span> — <span class="purple">Transfers</span> — <span class="green">Payments</span></span>
+        </h6>
 
       </div>
       <div class="row">
 
-        <h6 class="col title">By category<div id="chartContainer3" style="height: 300px; width: 100%;display: inline-block;"></div></h6>
+        <h6 class="col title">By category
+          <div id="chartThree" style="height: 300px; width: 100%;display: inline-block;"></div>
+          <span class="d-block text-center"><span class="blue">Restaurant</span> — <span class="red">Grocery</span> — <span class="purple">Car</span> — <span class="green">Services</span></span>
+          <span class="d-block text-center"><span class="beige">Home</span> — <span class="yellow">Education</span> — <span class="dark-blue">Fun</span> — <span class="orange">Travel</span></span>
+        </h6>
 
-
-        <h6 class="col title">Accumulated<div id="chartContainer4" style="height: 300px; width: 100%;display: inline-block;"></div></h6>
-
+        <h6 class="col title">Accumulated
+          <div id="chartFour" style="height: 300px; width: 100%;display: inline-block;"></div>
+          <span class="d-block text-center"><span class="blue">Current Month</span> — <span class="red">Last Month</span></span>
+        </h6>
 
       </div>
 
@@ -79,272 +93,80 @@
 
   <script>
   // Inicio Last 6 months //
-    var chart = new CanvasJS.Chart("chartContainer1", {
-      animationEnabled: true,
-      theme: "dark2",
-      title:{
-        text: "",
-        fontFamily: "arial black",
-        fontColor: "#695A42"
-      },
-      axisX: {
-        interval: 12,
-        intervalType: "month"
-      },
-      axisY:{
-        valueFormatString:"0",
-        gridColor: "#B6B1A8",
-        tickColor: "#B6B1A8"
-      },
-      toolTip: {
-        shared: true,
-        content: toolTipContent
-      },
-      data: [{
-        type: "stackedColumn",
-        showInLegend: true,
-        color: "#17a2b8",
-        name: "Purchases",
-        dataPoints: [
-          { y: 6.75, x: new Date(2010,0) },
-          { y: 8.57, x: new Date(2011,0) },
-          { y: 10.64, x: new Date(2012,0) },
-          { y: 13.97, x: new Date(2013,0) },
-          { y: 13.97, x: new Date(2014,0) },
-          { y: 15.97, x: new Date(2015,0) }
-        ]
-        },
-        {        
-          type: "stackedColumn",
-          showInLegend: true,
-          name: "Withdrawals",
-          color: "#dc3545",
-          dataPoints: [
-            { y: 6.82, x: new Date(2010,0) },
-            { y: 9.02, x: new Date(2011,0) },
-            { y: 11.80, x: new Date(2012,0) },
-            { y: 14.11, x: new Date(2013,0) },
-            { y: 74.11, x: new Date(2014,0) },
-            { y: 34.11, x: new Date(2015,0) },
-          ]
-        },
-        {        
-          type: "stackedColumn",
-          showInLegend: true,
-          name: "Transfers",
-          color: "#6f42c1",
-          dataPoints: [
-            { y: 7.28, x: new Date(2010,0) },
-            { y: 9.72, x: new Date(2011,0) },
-            { y: 13.30, x: new Date(2012,0) },
-            { y: 14.9, x: new Date(2013,0) },
-            { y: 91.9, x: new Date(2014,0) },
-            { y: 84.9, x: new Date(2015,0) }
-          ]
-        },
-        {        
-          type: "stackedColumn",
-          showInLegend: true,
-          name: "Payments",
-          color: "#28a745",
-          dataPoints: [
-            { y: 8.44, x: new Date(2010,0) },
-            { y: 10.58, x: new Date(2011,0) },
-            { y: 14.41, x: new Date(2012,0) },
-            { y: 16.86, x: new Date(2013,0) },
-            { y: 61.86, x: new Date(2014,0) },
-            { y: 56.86, x: new Date(2015,0) }
-          ]
-      }]
+    Morris.Bar({
+      element: 'chartOne',
+      data: [
+        { y: '2006', a: 100, b: 90, c: 50, d: 25 },
+        { y: '2007', a: 75,  b: 65, c: 50, d: 25 },
+        { y: '2008', a: 50,  b: 40, c: 50, d: 25 },
+        { y: '2009', a: 75,  b: 65, c: 50, d: 25 },
+        { y: '2010', a: 50,  b: 40, c: 50, d: 25 },
+        { y: '2011', a: 75,  b: 65, c: 50, d: 25 },
+        { y: '2012', a: 100, b: 90, c: 50, d: 25 }
+      ],
+      xkey: 'y',
+      ykeys: ['a', 'b', 'c', 'd'],
+      labels: ['Purchases', 'Withdrawals', 'Transfers', 'Payments'],
+      barColors: ['#379EAB', '#C24545', '#805F81', '#86B40B'],
+      stacked: true,
+      hideHover: true,
     });
-    chart.render();
-
-    function toolTipContent(e) {
-      var str = "";
-      var total = 0;
-      var str2, str3;
-      for (var i = 0; i < e.entries.length; i++){
-        var  str1 = "<span style= \"color:"+e.entries[i].dataSeries.color + "\"> "+e.entries[i].dataSeries.name+"</span>: $<strong>"+e.entries[i].dataPoint.y+"</strong>bn<br/>";
-        total = e.entries[i].dataPoint.y + total;
-        str = str.concat(str1);
-      }
-      str2 = "<span style = \"color:DodgerBlue;\"><strong>"+(e.entries[0].dataPoint.x).getFullYear()+"</strong></span><br/>";
-      total = Math.round(total * 100) / 100;
-      str3 = "<span style = \"color:Tomato\">Total:</span><strong> $"+total+"</strong>bn<br/>";
-      return (str2.concat(str)).concat(str3);
-    }
   // Fin Last 6 months //
 
   // Inicio By day //
-    var chart = new CanvasJS.Chart("chartContainer2", {
-      animationEnabled: true,
-      theme: "dark2",
-      title:{
-      text: ""
-      },
+    Morris.Bar({
+      element: 'chartTwo',
       data: [
-      {        
-        type: "column",
-        showInLegend: true, 
-        name: "series1",
-        legendText: "Purchases",
-        dataPoints: [
-        { x: 10, y: 71 },
-        { x: 20, y: 55},
-        { x: 30, y: 50 },
-        { x: 40, y: 65 },
-        { x: 50, y: 95 },
-        { x: 60, y: 68 },
-        { x: 70, y: 28 },
-        { x: 80, y: 34 },
-        { x: 90, y: 14}
-      
-        ]
-      },
-        {        
-        type: "column",
-        legendText: "Withdrawals",
-       name: "series2",
-        showInLegend: true, 
-        dataPoints: [
-        { x: 10, y: 7 },
-        { x: 20, y: 5},
-        { x: 30, y: 5 },
-        { x: 40, y: 16 },
-        { x: 50, y: 9 },
-        { x: 60, y: 61 },
-        { x: 70, y: 18 },
-        { x: 80, y: 14 },
-        { x: 90, y: 24}
-      
-        ]
-      },
-        {        
-        type: "column",
-        legendText: "Transfers",
-       name: "series2",
-        showInLegend: true, 
-        dataPoints: [
-        { x: 10, y: 7 },
-        { x: 20, y: 5},
-        { x: 30, y: 5 },
-        { x: 40, y: 16 },
-        { x: 50, y: 9 },
-        { x: 60, y: 61 },
-        { x: 70, y: 18 },
-        { x: 80, y: 14 },
-        { x: 90, y: 24}
-      
-        ]
-      },
-        {        
-        type: "column",
-        legendText: "Payments",
-       name: "series2",
-        showInLegend: true, 
-        dataPoints: [
-        { x: 10, y: 7 },
-        { x: 20, y: 5},
-        { x: 30, y: 5 },
-        { x: 40, y: 16 },
-        { x: 50, y: 9 },
-        { x: 60, y: 61 },
-        { x: 70, y: 18 },
-        { x: 80, y: 14 },
-        { x: 90, y: 24}
-      
-        ]
-      }
-      ]
+        { y: '2006', a: 100, b: 90, c: 50, d: 25 },
+        { y: '2007', a: 75,  b: 65, c: 50, d: 25 },
+        { y: '2008', a: 50,  b: 40, c: 50, d: 25 },
+        { y: '2009', a: 75,  b: 65, c: 50, d: 25 },
+        { y: '2010', a: 50,  b: 40, c: 50, d: 25 },
+        { y: '2011', a: 75,  b: 65, c: 50, d: 25 },
+        { y: '2012', a: 100, b: 90, c: 50, d: 25 }
+      ],
+      xkey: 'y',
+      ykeys: ['a', 'b', 'c', 'd'],
+      labels: ['Purchases', 'Withdrawals', 'Transfers', 'Payments'],
+      barColors: ['#379EAB', '#C24545', '#805F81', '#86B40B'],
+      hideHover: true,
     });
-
-    chart.render();
   // Fin By day //
 
   // Inicio By category //
-    var chart = new CanvasJS.Chart("chartContainer3", {
-      animationEnabled: true,
-      theme: "dark2",
-      title:{
-        text: "",
-        horizontalAlign: "left"
-      },
-      data: [{
-        type: "doughnut",
-        startAngle: 60,
-        //innerRadius: 60,
-        indexLabelFontSize: 17,
-        indexLabel: "{label} - #percent%",
-        toolTipContent: "<b>{label}:</b> {y} (#percent%)",
-        dataPoints: [
-          { y: 67, label: "Restaurant" },
-          { y: 28, label: "Grocery" },
-          { y: 10, label: "Car" },
-          { y: 7, label: "Services"},
-          { y: 15, label: "Home"},
-          { y: 6, label: "Education"},
-          { y: 6, label: "Fun"},
-          { y: 6, label: "Travel"}
-        ]
-      }]
+    Morris.Donut({
+      element: 'chartThree',
+      data: [
+        {label: "Download Sales", value: 20},
+        {label: "In-Store Sales", value: 20},
+        {label: "Mail-Order Sales", value: 20},
+        {label: "Mail-Order Sales", value: 20},
+        {label: "Mail-Order Sales", value: 20},
+        {label: "Mail-Order Sales", value: 20},
+        {label: "Mail-Order Sales", value: 20},
+        {label: "Mail-Order Sales", value: 20}
+      ],
+      colors: ['#379EAB', '#C24545', '#805F81', '#86B40B', '#F2DCD0', '#F7E154', '#305CD3', '#EFA834'],
     });
-    chart.render();
   // Fin By category //
 
   // Inicio Accumulated //
-    var chart = new CanvasJS.Chart("chartContainer4", {
-      animationEnabled: true,
-      theme: "dark2",
-      title:{
-        text: ""
-      },
-      axisY :{
-        valueFormatString: "#0,.",
-        suffix: "k"
-      },
-      axisX: {
-        title: ""
-      },
-      toolTip: {
-        shared: true
-      },
-      data: [{        
-        type: "stackedArea",
-        showInLegend: true,
-        toolTipContent: "<span style=\"color:#4F81BC\"><strong>{name}: </strong></span> {y}",
-        name: "Current month",
-        dataPoints: [
-        { x: 1, y: 3000 },
-        { x: 2, y: 7000 },
-        { x: 3, y: 10000 },
-        { x: 4, y: 14000 },
-        { x: 5, y: 23000 },
-        { x: 6, y: 31000 },
-        { x: 7, y: 42000 },
-        { x: 8, y: 56000 },
-        { x: 9, y: 64000 },
-        { x: 10, y: 81000 },
-        { x: 11, y: 105000 }
-        ]
-      },
-      {        
-        type: "stackedArea",  
-        name: "Last month",
-        toolTipContent: "<span style=\"color:#C0504E\"><strong>{name}: </strong></span> {y}<br><b>Total:<b> #total",
-        showInLegend: true,
-        dataPoints: [
-        { x: 4, y: 4000 },
-        { x: 5, y: 6000 },
-        { x: 6, y: 9000 },
-        { x: 7,y: 14000 },
-        { x: 8,y: 21000 },
-        { x: 9, y: 31000 },
-        { x: 10, y: 46000 },
-        { x: 11, y: 61000 }   
-        ]
-      }]
+    Morris.Area({
+      element: 'chartFour',
+      data: [
+        { y: '2006', a: 100, b: 50 },
+        { y: '2007', a: 100, b: 50 },
+        { y: '2008', a: 100, b: 50 },
+        { y: '2009', a: 100, b: 50 },
+        { y: '2010', a: 100, b: 50 },
+        { y: '2011', a: 100, b: 50 },
+        { y: '2012', a: 100, b: 50 }
+      ],
+      xkey: 'y',
+      ykeys: ['a', 'b'],
+      labels: ['Last Month', 'Current Month'],
+      lineColors: ['#379EAB', '#C24545'],
     });
-    chart.render();
   // Fin Accumulated //
   </script>
 

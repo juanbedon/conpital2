@@ -27,6 +27,10 @@ class Api::V1::ExpensesController < ApplicationController
 
   end
 
+  def show
+    @expense = Expense.find(params[:id])
+  end
+
   def new
     @expense = Expense.new
   end
