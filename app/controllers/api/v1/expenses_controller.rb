@@ -1,66 +1,81 @@
 class Api::V1::ExpensesController < ApplicationController
-  
-  protect_from_forgery with: :null_session
-  before_action :authenticate
 
   def index
-    @expenses = Expense.where(user: token_user)
-    @expenses = @expenses.where(category_id: params[:category_id]) if params[:category_id].present?    
-    @expenses = @expenses.where(transaction_type: params[:type]) if params[:type].present?
+
+    transaction_type = params["transaction_type"]
+    category = params[:category]
+
+    if transaction_type && !category
+      @expenses = Expense.joins(:transaction_type).where("transaction_types.name = ?", transaction_type.capitalize)
+    elsif category && !transaction_type
+      @expenses = Expense.joins(:category).where("categories.name = ?", category.capitalize)
+    elsif category && transaction_type
+      @expenses = Expense.joins(:transaction_type, :category).where("transaction_types.name = ? AND categories.name = ?",
+      transaction_type.capitalize, category.capitalize)
+    else
+      @expenses = Expense.all
+    end
+
+    @transaction_types = TransactionType.all
+    @category = Category.all
+
+    respond_to do |format|
+      format.html { render :index}
+      format.json { render json: @expenses, status: :ok}
+      format.js { render :index}
+    end
+
+  end
+
+  def new
+    @expense = Expense.new
   end
 
   def create
-    if category_verify
-      @expense = Expense.new(expense_params.merge(user: token_user))
-      if @expense.save
-        render json: @expense, status: 201
-      else
-        render json: { errors: @expense.errors }, status: 422
-      end
+    @expense = Expense.new(expense_params)
+    @expense.user_id = current_user
+    puts @expense.valid?
+    puts @expense.errors.full_messages
+    byebug
+
+    if @expense.save
+      redirect_to expenses_path, notice: 'Your expense was submitted successfully!'
     else
-      head 403
+      redirect_to expenses_path, notice: 'Your expense was not submitted!'
+      render json: { errors: expense.errors }, status: 422
     end
+
   end
 
   def update
-    @expense = Expense.find(params[:id])
-    if @expense.user == token_user && category_verify
-      if @expense.update(expense_params)
-        render json: @expense, status: 204
-      else
-        render json: { errors: @expense.errors }, status: 422
-      end
+
+    expense = Expense.find(params[:id])
+    if expense.update(expense_params)
+      render json: expense
     else
-      head 403
+      render json: { errors: expense.errors }, status: 422
     end
+
   end
 
-  def destroy
-    @expense = Expense.find(params[:id])
-    if @expense.user == token_user
-      @expense.destroy
-      head 204
-    else
-      head 403
+    def destroy
+
+      expense = Expense.find(params[:id])
+      expense.destroy
+  ​
+      head :no_content
+
     end
-  end
+
 
   private
+
     def expense_params
-      params.require(:expense).permit(:concept, :amount, :transaction_type, :category_id, :date)
+      params.require(:expense).permit(:transaction_type_id, :date, :concept, :category_id, :amount)
     end
 
-    def authenticate
-      unless User.where(api_token: request.headers['HTTP_X_API_TOKEN']).exists? 
-        head 401
-      end
+    def current_user
+      @current_user ||= User.find_by(id: session[:user_id])
     end
 
-    def token_user
-      User.find_by(api_token: request.headers['HTTP_X_API_TOKEN'])
-    end
-
-    def category_verify
-      token_user.categories.where(id: expense_params[:category_id]).exists?
-    end
 end
