@@ -14,13 +14,13 @@
 #
 
 class Expense < ApplicationRecord
-  belongs_to :user
+  #belongs_to :user
   belongs_to :category
   belongs_to :transaction_type
 
-  validates :user_id, presence: true
-  validates :category, presence: true
-  validates :transaction_type, presence: true
+  #validates :user_id, presence: true
+  #validates :category_id, presence: true
+  #validates :transaction_type_id, presence: true
   validates :amount, numericality: { greater_than: 0 }
   validates :concept, presence: true
   before_create :date_cant_be_nil  
