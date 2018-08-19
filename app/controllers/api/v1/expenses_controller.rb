@@ -51,6 +51,10 @@ class Api::V1::ExpensesController < ApplicationController
 
   end
 
+  def edit
+    @expense = Expense.find(params[:id])
+  end
+
   def update
 
     expense = Expense.find(params[:id])
@@ -62,14 +66,15 @@ class Api::V1::ExpensesController < ApplicationController
 
   end
 
-    def destroy
+  def destroy
 
-      expense = Expense.find(params[:id])
-      expense.destroy
-  ​
-      head :no_content
+    expense = Expense.find(params[:id])
+    expense.destroy
+​    
+    redirect_to expense_path, notice: "Your expense was removed successfully!"
+    head :no_content
 
-    end
+  end
 
 
   private
