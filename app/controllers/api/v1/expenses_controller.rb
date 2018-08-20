@@ -28,7 +28,11 @@ class Api::V1::ExpensesController < ApplicationController
   end
 
   def show
+    
     @expense = Expense.find(params[:id])
+
+    render json: @expense
+
   end
 
   def new
@@ -36,11 +40,9 @@ class Api::V1::ExpensesController < ApplicationController
   end
 
   def create
+    
     @expense = Expense.new(expense_params)
     @expense.user_id = current_user
-    puts @expense.valid?
-    puts @expense.errors.full_messages
-    byebug
 
     if @expense.save
       redirect_to expenses_path, notice: 'Your expense was submitted successfully!'
@@ -75,7 +77,6 @@ class Api::V1::ExpensesController < ApplicationController
     head :no_content
 
   end
-
 
   private
 
