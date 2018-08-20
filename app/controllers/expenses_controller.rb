@@ -37,8 +37,9 @@ class ExpensesController < ApplicationController
 
   def create
 
-    Expense.create(expense_params)
+    @expense = Expense.new(expense_params)
     @expense.user_id = current_user.id
+    @expense.save
 
     if @expense.save
       redirect_to expenses_path, notice: 'Your expense was submitted successfully!'
@@ -75,10 +76,6 @@ class ExpensesController < ApplicationController
 
     def expense_params
       params.require(:expense).permit(:transaction_type_id, :date, :concept, :category_id, :amount)
-    end
-
-    def current_user
-      @current_user ||= User.find_by(id: session[:user_id])
     end
 
 end
