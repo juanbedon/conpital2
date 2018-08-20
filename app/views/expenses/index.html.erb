@@ -64,19 +64,19 @@
               Select Month
             </button>
             <div class="dropdown-menu">
-              <a class="dropdown-item" href="#">Current Month</a>
-              <a class="dropdown-item" href="#">1 Month Ago</a>
-              <a class="dropdown-item" href="#">2 Months Ago</a>
-              <a class="dropdown-item" href="#">3 Months Ago</a>
-              <a class="dropdown-item" href="#">4 Months Ago</a>
-              <a class="dropdown-item" href="#">5 Months Ago</a>
-              <a class="dropdown-item" href="#">6 Months Ago</a>
-              <a class="dropdown-item" href="#">7 Months Ago</a>
-              <a class="dropdown-item" href="#">8 Months Ago</a>
-              <a class="dropdown-item" href="#">9 Months Ago</a>
-              <a class="dropdown-item" href="#">10 Months Ago</a>
-              <a class="dropdown-item" href="#">11 Months Ago</a>
-              <a class="dropdown-item" href="#">12 Months Ago</a>
+              <%= link_to Date.today.strftime("%B, %Y"), expenses_path, class: 'dropdown-item' %>
+              <%= link_to 1.month.ago.strftime("%B, %Y"), expenses_path, class: 'dropdown-item' %>
+              <%= link_to 2.months.ago.strftime("%B, %Y"), expenses_path, class: 'dropdown-item' %>
+              <%= link_to 3.months.ago.strftime("%B, %Y"), expenses_path, class: 'dropdown-item' %>
+              <%= link_to 4.months.ago.strftime("%B, %Y"), expenses_path, class: 'dropdown-item' %>
+              <%= link_to 5.months.ago.strftime("%B, %Y"), expenses_path, class: 'dropdown-item' %>
+              <%= link_to 6.months.ago.strftime("%B, %Y"), expenses_path, class: 'dropdown-item' %>
+              <%= link_to 7.months.ago.strftime("%B, %Y"), expenses_path, class: 'dropdown-item' %>
+              <%= link_to 8.months.ago.strftime("%B, %Y"), expenses_path, class: 'dropdown-item' %>
+              <%= link_to 9.months.ago.strftime("%B, %Y"), expenses_path, class: 'dropdown-item' %>
+              <%= link_to 10.months.ago.strftime("%B, %Y"), expenses_path, class: 'dropdown-item' %>
+              <%= link_to 11.months.ago.strftime("%B, %Y"), expenses_path, class: 'dropdown-item' %>
+              <%= link_to 1.year.ago.strftime("%B, %Y"), expenses_path, class: 'dropdown-item' %>
             </div>
           </div>
         </div>
