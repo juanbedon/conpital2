@@ -29,6 +29,23 @@
 	}
 }
 
+.registrations.create {
+	h2 {
+		color: #F1ECE9;
+		font-size: 1rem;
+		font-weight: bolder;
+	}
+	.field {
+		color: #F1ECE9;
+	}
+	.field em {
+		font-size: 0.8rem;
+	}
+	li {
+		color: #F1ECE9;
+	}
+}
+
 .passwords.new {
 	h2 {
 		color: #F1ECE9;
