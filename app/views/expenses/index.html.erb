@@ -50,27 +50,28 @@
     <!-- Inicio Botón -->
         <div class="row">
           <div class="col">
-            <%= link_to new_expense_path , remote: true , :class => "btn btn-success pull-left", "data-toggle" => "modal", 'data-target' => '#exampleModalCenter'  do %>
+            <%= link_to new_expense_path , remote: true , :class => "btn btn-sm btn-info font-weight-bold", "data-toggle" => "modal", 'data-target' => '#exampleModalCenter' do %>
               New Expense
             <% end %>
           </div>
     <!-- Fin Botón -->
 
     <!-- Inicio Dropdown Mes -->
-          <div class="col">
-            <div class="container">
-              <div class="dropdown">
-                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Month</button>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                  <a class="dropdown-item" href="#">Action</a>
-                  <a class="dropdown-item" href="#">Another action</a>
-                  <a class="dropdown-item" href="#">Something else here</a>
-                </div>
-              </div>
+      <div class="col">
+        <div class="container">
+          <div class="dropdown">
+            <button type="button" class="btn btn-sm btn-secondary dropdown-toggle font-weight-bold" data-toggle="dropdown">
+              Select Month
+            </button>
+            <div class="dropdown-menu">
+              <a class="dropdown-item" href="#">Link 1</a>
+              <a class="dropdown-item" href="#">Link 2</a>
+              <a class="dropdown-item" href="#">Link 3</a>
             </div>
           </div>
         </div>
-      <!--Fin Dropdown Mes -->
+      </div>
+    <!--Fin Dropdown Mes -->
 
     <!-- Inicio Datos -->
         <table class="col table table-striped">
