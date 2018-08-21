@@ -3,7 +3,7 @@ class ExpensesController < ApplicationController
   def index
 
     transaction_type = params["transaction_type"]
-    category = params[:category]
+    category = params["category"]
 
     if transaction_type && !category
       @expenses = Expense.joins(:transaction_type).where("transaction_types.name = ?", transaction_type.capitalize)

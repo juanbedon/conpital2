@@ -22,14 +22,12 @@
     <% flash.keys.each do |key| %>
       <div class="alert alert-<%= key.to_s %> mb-0" role="alert" style="color: #000;background-color: rgb(204, 229, 255)">
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
+          <span aria-hidden="true">&times;</span> 
         </button>
         <%= flash[key] %>
       </div>
     <% end %>
   <% end %>
-
-  <%= render 'layouts/navbar' %>
   
   <div class="<%= controller_name %> <%= action_name %>">
     <%= yield %>
