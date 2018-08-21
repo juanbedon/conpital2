@@ -1,4 +1,5 @@
 class DashboardController < ApplicationController
+
   def index
     handler = DashboardHandler.new(Expense.all)
     @amount_of_today = handler.amount_of_today
@@ -6,4 +7,5 @@ class DashboardController < ApplicationController
     @amount_of_current_month = handler.amount_of_current_month
     @amount_of_last_month = handler.amount_of_last_month
   end
+  
 end
