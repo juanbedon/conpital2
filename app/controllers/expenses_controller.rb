@@ -19,6 +19,19 @@ class ExpensesController < ApplicationController
     @transaction_types = TransactionType.all
     @category = Category.all
 
+    current_month = params["current_month"]
+
+      byebug
+    if current_month
+      @expenses = Expense.where(date: Date.today.strftime("%B, %Y"))
+    elsif current_month
+      @expenses = Expense.where(date: 1.month.ago.strftime("%B, %Y"))
+    elsif current_month
+      @expenses = Expense.where(date: 1.year.ago.strftime("%B, %Y"))
+    else
+      @expenses = Expense.all
+    end
+
     respond_to do |format|
       format.html { render :index}
       format.json { render json: @expenses, status: :ok}
@@ -68,7 +81,6 @@ class ExpensesController < ApplicationController
     redirect_to expense_path, notice: "Your expense was removed successfully!"
 
   end
-
 
   private
 

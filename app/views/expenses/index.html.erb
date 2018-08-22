@@ -94,8 +94,8 @@
               Select Month
             </button>
             <div class="dropdown-menu">
-              <%= link_to Date.today.strftime("%B, %Y"), expenses_path, class: 'dropdown-item' %>
-              <%= link_to 1.month.ago.strftime("%B, %Y"), expenses_path, class: 'dropdown-item' %>
+              <%= link_to Date.today.strftime("%B, %Y"), "#", remote: true, class: 'dropdown-item' %>
+              <%= link_to 1.month.ago.strftime("%B, %Y"), "#", remote: true, class: 'dropdown-item' %>
               <%= link_to 2.months.ago.strftime("%B, %Y"), expenses_path, class: 'dropdown-item' %>
               <%= link_to 3.months.ago.strftime("%B, %Y"), expenses_path, class: 'dropdown-item' %>
               <%= link_to 4.months.ago.strftime("%B, %Y"), expenses_path, class: 'dropdown-item' %>
@@ -106,7 +106,7 @@
               <%= link_to 9.months.ago.strftime("%B, %Y"), expenses_path, class: 'dropdown-item' %>
               <%= link_to 10.months.ago.strftime("%B, %Y"), expenses_path, class: 'dropdown-item' %>
               <%= link_to 11.months.ago.strftime("%B, %Y"), expenses_path, class: 'dropdown-item' %>
-              <%= link_to 1.year.ago.strftime("%B, %Y"), expenses_path, class: 'dropdown-item' %>
+              <%= link_to 1.year.ago.strftime("%B, %Y"), "#", remote: true, class: 'dropdown-item' %>
             </div>
           </div>
         </div>
@@ -182,8 +182,26 @@
             }
           });
         });
-      });
     // Fin Filtro Category //
+
+    // Inicio Filtro Mes //
+        $(".current_month").on('click', function(e) {
+          var filter = this.id;
+          var param = { "current_month": filter };
+          e.preventDefault();
+          $.ajax({
+            type: "GET",
+            url: "/expenses.js",
+            dataType: 'html',
+            data: param,
+            success: function(response) {
+              $("body").epmty();
+              $("body").html(response);
+            }
+          })
+        });    
+      });
+    // Fin Filtro Mes //
   </script>
 
   <!-- Inicio Modal -->
