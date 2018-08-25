@@ -17,7 +17,7 @@ class ExpensesController < ApplicationController
     end
 
     @transaction_types = TransactionType.all
-    @category = Category.all
+    @category = Category.all;
 
     current_month = params["current_month"]
     month_ago = params["month_ago"]
@@ -59,14 +59,6 @@ class ExpensesController < ApplicationController
       @expenses = Expense.where(date: 11.months.ago.all_month)
     elsif twelve_months_ago
       @expenses = Expense.where(date: 12.months.ago.all_month)
-    else
-      @expenses = Expense.all
-    end
-
-    respond_to do |format|
-      format.html { render :index}
-      format.json { render json: @expenses, status: :ok}
-      format.js { render :index}
     end
 
   end
