@@ -21,15 +21,11 @@ class ExpensesController < ApplicationController
 
     current_month = params["current_month"]
 
-      byebug
     if current_month
-      @expenses = Expense.find(date: Date.today.strftime("%B, %Y"))
-    elsif current_month
-      @expenses = Expense.find(date: 1.month.ago.strftime("%B, %Y"))
-    elsif current_month
-      @expenses = Expense.find(date: 1.year.ago.strftime("%B, %Y"))
+      byebug
+      @expenses = Expense.where(date: Date.current.strftime("%Y-%m-%d"))
     else
-      @expenses = Expense.all
+      @expenses = Expense.where(date: 5.months.ago.strftime("%Y-%m-%d"))
     end
 
     respond_to do |format|

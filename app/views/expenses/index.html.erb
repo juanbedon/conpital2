@@ -94,7 +94,7 @@
               Select Month
             </button>
             <div class="dropdown-menu">
-              <%= link_to Date.today.strftime("%B, %Y"), "#", remote: true, class: 'dropdown-item' %>
+              <%= link_to Date.current.strftime("%B, %Y"), "",remote: true, class: 'dropdown-item current_month' %>
               <%= link_to 1.month.ago.strftime("%B, %Y"), "#", remote: true, class: 'dropdown-item' %>
               <%= link_to 2.months.ago.strftime("%B, %Y"), expenses_path, class: 'dropdown-item' %>
               <%= link_to 3.months.ago.strftime("%B, %Y"), expenses_path, class: 'dropdown-item' %>
