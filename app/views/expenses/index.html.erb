@@ -126,8 +126,8 @@
                 <th scope="col">Edit</th>
                 <th scope="col">Remove</th>
               <% else %>
-                <th scope="col"></th>
-                <th scope="col"></th>
+                <th scope="col">Edit</th>
+                <th scope="col">Remove</th>
               <% end %>
             </tr>
           </thead>
@@ -143,8 +143,8 @@
                 <td><%= link_to 'Edit', edit_expense_path(expense), class: 'btn btn-sm btn-info' %></td>
                 <td><%= link_to "Remove", expense, method: :delete, data: { confirm: "Are you sure?" }, class: 'btn btn-sm btn-danger' %></td>
               <% else %>
-              <td></td>
-              <td></td>
+                <td></td>
+                <td></td>
               <% end %>
             </tr>
           </tbody>
