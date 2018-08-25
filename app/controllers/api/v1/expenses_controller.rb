@@ -1,5 +1,8 @@
 class Api::V1::ExpensesController < ApplicationController
 
+  protect_from_forgery with: :null_session
+  before_action :authenticate
+
   def index
 
     @expenses = Expense.all
@@ -24,13 +27,11 @@ class Api::V1::ExpensesController < ApplicationController
 
   def create
     
-    @expense = Expense.new(expense_params)
-    @expense.user_id = current_user
+    @expense = Expense.new(expense_params.merge(user: token_user))
 
     if @expense.save
-      redirect_to expenses_path, notice: 'Your expense was submitted successfully!'
+      render json: @expense, status: 201
     else
-      redirect_to expenses_path, notice: 'Your expense was not submitted!'
       render json: { errors: expense.errors }, status: 422
     end
 
@@ -43,21 +44,26 @@ class Api::V1::ExpensesController < ApplicationController
   def update
 
     expense = Expense.find(params[:id])
-    if expense.update(expense_params)
-      render json: expense
+    if expense.user == token_user
+      if expense.update(expense_params)
+        render json: expense, status: 204
+      else
+        render json: { errors: expense.errors }, status: 422
+      end
     else
-      render json: { errors: expense.errors }, status: 422
+      head 403
     end
 
   end
 
   def destroy
 
-    expense = Expense.find(params[:id])
-    expense.destroy
-​    
-    redirect_to expense_path, notice: "Your expense was removed successfully!"
-    head :no_content
+    @expense = Expense.find(params[:id])
+
+    if @expense.user == token_user
+      @expense.destroy
+      head 204
+    end
 
   end
 
@@ -67,8 +73,14 @@ class Api::V1::ExpensesController < ApplicationController
       params.require(:expense).permit(:transaction_type_id, :date, :concept, :category_id, :amount)
     end
 
-    def current_user
-      @current_user ||= User.find_by(id: session[:user_id])
+    def authenticate
+      unless User.where(auth_token: request.headers['HTTP_X_API_TOKEN']).exists? 
+        head 401
+      end
+    end
+
+    def token_user
+      User.find_by(auth_token: request.headers['HTTP_X_API_TOKEN'])
     end
 
 end
