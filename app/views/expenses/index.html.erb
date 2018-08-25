@@ -122,8 +122,13 @@
               <th scope="col">Category</th>
               <th scope="col">Amount</th>
               <th scope="col">Transaction Type</th>
-              <th scope="col">Edit</th>
-              <th scope="col">Remove</th>
+              <% if user_signed_in? %>
+                <th scope="col">Edit</th>
+                <th scope="col">Remove</th>
+              <% else %>
+                <th scope="col"></th>
+                <th scope="col"></th>
+              <% end %>
             </tr>
           </thead>
           <tbody>
@@ -134,8 +139,13 @@
               <td><%= expense.category.name %></td>
               <td><%= number_to_currency(expense.amount) %></td>
               <td><%= expense.transaction_type.name %></td>
-              <td><%= link_to 'Edit', edit_expense_path(expense), class: 'btn btn-sm btn-info' %></td>
-              <td><%= link_to "Remove", expense, method: :delete, data: { confirm: "Are you sure?" }, class: 'btn btn-sm btn-danger' %></td>
+              <% if user_signed_in? %>
+                <td><%= link_to 'Edit', edit_expense_path(expense), class: 'btn btn-sm btn-info' %></td>
+                <td><%= link_to "Remove", expense, method: :delete, data: { confirm: "Are you sure?" }, class: 'btn btn-sm btn-danger' %></td>
+              <% else %>
+              <td></td>
+              <td></td>
+              <% end %>
             </tr>
           </tbody>
             <% end %>
