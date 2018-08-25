@@ -72,15 +72,7 @@ class ExpensesController < ApplicationController
   end
 
   def create
-
-    @expense = current_user.expenses.create(expense_params)
-
-    if @expense.save
-      redirect_to expenses_path, notice: 'Your expense was submitted successfully!'
-    else
-      redirect_to expenses_path, notice: 'Your expense was not submitted!'
-    end
-
+    @expense = Expense.create(expense_params)
   end
 
   def edit
