@@ -25,7 +25,7 @@ class ExpensesController < ApplicationController
       byebug
       @expenses = Expense.where(date: Date.current.strftime("%Y-%m-%d"))
     else
-      @expenses = Expense.where(date: 5.months.ago.strftime("%Y-%m-%d"))
+      @expenses = Expense.where(date: 0.months.ago.all_month)
     end
 
     respond_to do |format|
