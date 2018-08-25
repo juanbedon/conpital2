@@ -95,18 +95,18 @@
             </button>
             <div class="dropdown-menu">
               <%= link_to 0.months.ago.strftime("%B, %Y"), "", remote: true, class: 'dropdown-item current_month' %>
-              <%= link_to 1.month.ago.strftime("%B, %Y"), "", remote: true, class: 'dropdown-item' %>
-              <%= link_to 2.months.ago.strftime("%B, %Y"), "", remote: true, class: 'dropdown-item' %>
-              <%= link_to 3.months.ago.strftime("%B, %Y"), "", remote: true, class: 'dropdown-item' %>
-              <%= link_to 4.months.ago.strftime("%B, %Y"), "", remote: true, class: 'dropdown-item' %>
-              <%= link_to 5.months.ago.strftime("%B, %Y"), "", remote: true, class: 'dropdown-item' %>
-              <%= link_to 6.months.ago.strftime("%B, %Y"), "", remote: true, class: 'dropdown-item' %>
-              <%= link_to 7.months.ago.strftime("%B, %Y"), "", remote: true, class: 'dropdown-item' %>
-              <%= link_to 8.months.ago.strftime("%B, %Y"), "", remote: true, class: 'dropdown-item' %>
-              <%= link_to 9.months.ago.strftime("%B, %Y"), "", remote: true, class: 'dropdown-item' %>
-              <%= link_to 10.months.ago.strftime("%B, %Y"), "", remote: true, class: 'dropdown-item' %>
-              <%= link_to 11.months.ago.strftime("%B, %Y"), "", remote: true, class: 'dropdown-item' %>
-              <%= link_to 12.months.ago.strftime("%B, %Y"), "", remote: true, class: 'dropdown-item' %>
+              <%= link_to 1.month.ago.strftime("%B, %Y"), "", remote: true, class: 'dropdown-item month_ago' %>
+              <%= link_to 2.months.ago.strftime("%B, %Y"), "", remote: true, class: 'dropdown-item two_months_ago' %>
+              <%= link_to 3.months.ago.strftime("%B, %Y"), "", remote: true, class: 'dropdown-item three_months_ago' %>
+              <%= link_to 4.months.ago.strftime("%B, %Y"), "", remote: true, class: 'dropdown-item four_months_ago' %>
+              <%= link_to 5.months.ago.strftime("%B, %Y"), "", remote: true, class: 'dropdown-item five_months_ago' %>
+              <%= link_to 6.months.ago.strftime("%B, %Y"), "", remote: true, class: 'dropdown-item six_months_ago' %>
+              <%= link_to 7.months.ago.strftime("%B, %Y"), "", remote: true, class: 'dropdown-item seven_months_ago' %>
+              <%= link_to 8.months.ago.strftime("%B, %Y"), "", remote: true, class: 'dropdown-item eight_months_ago' %>
+              <%= link_to 9.months.ago.strftime("%B, %Y"), "", remote: true, class: 'dropdown-item nine_months_ago' %>
+              <%= link_to 10.months.ago.strftime("%B, %Y"), "", remote: true, class: 'dropdown-item ten_months_ago' %>
+              <%= link_to 11.months.ago.strftime("%B, %Y"), "", remote: true, class: 'dropdown-item eleven_months_ago' %>
+              <%= link_to 12.months.ago.strftime("%B, %Y"), "", remote: true, class: 'dropdown-item twelve_months_ago' %>
             </div>
           </div>
         </div>
@@ -195,11 +195,191 @@
             dataType: 'html',
             data: param,
             success: function(response) {
-              $("body").epmty();
+              $("body").empty();
               $("body").html(response);
             }
           })
-        });    
+        });
+        $(".month_ago").on('click', function(e) {
+          var filter = this.id;
+          var param = { "month_ago": filter };
+          e.preventDefault();
+          $.ajax({
+            type: "GET",
+            url: "/expenses.js",
+            dataType: 'html',
+            data: param,
+            success: function(response) {
+              $("body").empty();
+              $("body").html(response);
+            }
+          })
+        });
+        $(".two_months_ago").on('click', function(e) {
+          var filter = this.id;
+          var param = { "two_months_ago": filter };
+          e.preventDefault();
+          $.ajax({
+            type: "GET",
+            url: "/expenses.js",
+            dataType: 'html',
+            data: param,
+            success: function(response) {
+              $("body").empty();
+              $("body").html(response);
+            }
+          })
+        });
+        $(".three_months_ago").on('click', function(e) {
+          var filter = this.id;
+          var param = { "three_months_ago": filter };
+          e.preventDefault();
+          $.ajax({
+            type: "GET",
+            url: "/expenses.js",
+            dataType: 'html',
+            data: param,
+            success: function(response) {
+              $("body").empty();
+              $("body").html(response);
+            }
+          })
+        });
+        $(".four_months_ago").on('click', function(e) {
+          var filter = this.id;
+          var param = { "four_months_ago": filter };
+          e.preventDefault();
+          $.ajax({
+            type: "GET",
+            url: "/expenses.js",
+            dataType: 'html',
+            data: param,
+            success: function(response) {
+              $("body").empty();
+              $("body").html(response);
+            }
+          })
+        });
+        $(".five_months_ago").on('click', function(e) {
+          var filter = this.id;
+          var param = { "five_months_ago": filter };
+          e.preventDefault();
+          $.ajax({
+            type: "GET",
+            url: "/expenses.js",
+            dataType: 'html',
+            data: param,
+            success: function(response) {
+              $("body").empty();
+              $("body").html(response);
+            }
+          })
+        });
+        $(".six_months_ago").on('click', function(e) {
+          var filter = this.id;
+          var param = { "six_months_ago": filter };
+          e.preventDefault();
+          $.ajax({
+            type: "GET",
+            url: "/expenses.js",
+            dataType: 'html',
+            data: param,
+            success: function(response) {
+              $("body").empty();
+              $("body").html(response);
+            }
+          })
+        });
+        $(".seven_months_ago").on('click', function(e) {
+          var filter = this.id;
+          var param = { "seven_months_ago": filter };
+          e.preventDefault();
+          $.ajax({
+            type: "GET",
+            url: "/expenses.js",
+            dataType: 'html',
+            data: param,
+            success: function(response) {
+              $("body").empty();
+              $("body").html(response);
+            }
+          })
+        });
+        $(".eight_months_ago").on('click', function(e) {
+          var filter = this.id;
+          var param = { "eight_months_ago": filter };
+          e.preventDefault();
+          $.ajax({
+            type: "GET",
+            url: "/expenses.js",
+            dataType: 'html',
+            data: param,
+            success: function(response) {
+              $("body").empty();
+              $("body").html(response);
+            }
+          })
+        });
+        $(".nine_months_ago").on('click', function(e) {
+          var filter = this.id;
+          var param = { "nine_months_ago": filter };
+          e.preventDefault();
+          $.ajax({
+            type: "GET",
+            url: "/expenses.js",
+            dataType: 'html',
+            data: param,
+            success: function(response) {
+              $("body").empty();
+              $("body").html(response);
+            }
+          })
+        });
+        $(".ten_months_ago").on('click', function(e) {
+          var filter = this.id;
+          var param = { "ten_months_ago": filter };
+          e.preventDefault();
+          $.ajax({
+            type: "GET",
+            url: "/expenses.js",
+            dataType: 'html',
+            data: param,
+            success: function(response) {
+              $("body").empty();
+              $("body").html(response);
+            }
+          })
+        });
+        $(".eleven_months_ago").on('click', function(e) {
+          var filter = this.id;
+          var param = { "eleven_months_ago": filter };
+          e.preventDefault();
+          $.ajax({
+            type: "GET",
+            url: "/expenses.js",
+            dataType: 'html',
+            data: param,
+            success: function(response) {
+              $("body").empty();
+              $("body").html(response);
+            }
+          })
+        });
+        $(".twelve_months_ago").on('click', function(e) {
+          var filter = this.id;
+          var param = { "twelve_months_ago": filter };
+          e.preventDefault();
+          $.ajax({
+            type: "GET",
+            url: "/expenses.js",
+            dataType: 'html',
+            data: param,
+            success: function(response) {
+              $("body").empty();
+              $("body").html(response);
+            }
+          })
+        });
       });
     // Fin Filtro Mes //
   </script>
