@@ -53,15 +53,18 @@
 <!-- Inicio Gráficos -->
   <div class="container">
     <div class="row">
-
       <h6 class="col title">Last 6 months
-        <div id="chartOne" style="height: 300px; width: 100%; display: inline-block"></div>
+        <div id="chartTwo" style="height: 300px; width: 100%; display: inline-block">
+          <%= column_chart "" %>
+        </div>
         <span class="d-block text-center"><span class="blue">Purchases</span> — <span class="red">Withdrawals</span> — <span class="purple">Transfers</span> — <span class="green">Payments</span></span>
       </h6>
 
      
       <h6 class="col title">By day
-        <div id="chartTwo" style="height: 300px; width: 100%; display: inline-block"></div>
+        <div id="chartTwo" style="height: 300px; width: 100%; display: inline-block">
+          <%= column_chart "" %>
+        </div>
         <span class="d-block text-center"><span class="blue">Purchases</span> — <span class="red">Withdrawals</span> — <span class="purple">Transfers</span> — <span class="green">Payments</span></span>
       </h6>
 
@@ -69,13 +72,17 @@
     <div class="row">
 
       <h6 class="col title">By category
-        <div id="chartThree" style="height: 300px; width: 100%;display: inline-block;"></div>
+        <div id="chartThree" style="height: 300px; width: 100%;display: inline-block;">
+          <%= pie_chart "" %>
+        </div>
         <span class="d-block text-center"><span class="blue">Restaurant</span> — <span class="red">Grocery</span> — <span class="purple">Car</span> — <span class="green">Services</span></span>
         <span class="d-block text-center"><span class="beige">Home</span> — <span class="yellow">Education</span> — <span class="dark-blue">Fun</span> — <span class="orange">Travel</span></span>
       </h6>
 
       <h6 class="col title">Accumulated
-        <div id="chartFour" style="height: 300px; width: 100%;display: inline-block;"></div>
+        <div id="chartFour" style="height: 300px; width: 100%;display: inline-block;">
+          <%= area_chart "" %>
+        </div>
         <span class="d-block text-center"><span class="blue">Current Month</span> — <span class="red">Last Month</span></span>
       </h6>
 
@@ -83,17 +90,17 @@
   </div>
 <!-- Fin Gráficos -->
 
-<script>
+<!--<script>
 // Inicio Last 6 months //
   Morris.Bar({
     element: 'chartOne',
     data: [
-      { y: '<%= 5.months.ago.strftime("%b %e") %>', a: 25, b: 10, c: 50, d:  0 },
-      { y: '<%= 4.months.ago.strftime("%b %e") %>', a: 15, b: 35, c:  0, d: 25 },
-      { y: '<%= 3.months.ago.strftime("%b %e") %>', a: 50, b: 40, c: 50, d: 25 },
-      { y: '<%= 2.months.ago.strftime("%b %e") %>', a: 55, b: 40, c: 20, d: 25 },
-      { y: '<%= 1.months.ago.strftime("%b %e") %>', a:  0, b: 40, c: 50, d:  0 },
-      { y: '<%= 0.months.ago.strftime("%b %e") %>', a: 20, b:  0, c: 50, d: 25 },
+      { y: '<%#= 5.months.ago.strftime("%b %e") %>', a: 25, b: 10, c: 50, d:  0 },
+      { y: '<%#= 4.months.ago.strftime("%b %e") %>', a: 15, b: 35, c:  0, d: 25 },
+      { y: '<%#= 3.months.ago.strftime("%b %e") %>', a: 50, b: 40, c: 50, d: 25 },
+      { y: '<%#= 2.months.ago.strftime("%b %e") %>', a: 55, b: 40, c: 20, d: 25 },
+      { y: '<%#= 1.months.ago.strftime("%b %e") %>', a:  0, b: 40, c: 50, d:  0 },
+      { y: '<%#= 0.months.ago.strftime("%b %e") %>', a: 20, b:  0, c: 50, d: 25 },
     ],
     xkey: 'y',
     ykeys: ['a', 'b', 'c', 'd'],
@@ -154,8 +161,8 @@
   Morris.Area({
     element: 'chartFour',
     data: [
-      { y: '<%= 1.month.ago.strftime("%b %e") %>', a: 100, b: 200 },
-      { y: '<%= 0.months.ago.strftime("%b %e") %>', a: 80, b: 10 }
+      { y: '<%#= 1.month.ago.strftime("%b %e") %>', a: 100, b: 200 },
+      { y: '<%#= 0.months.ago.strftime("%b %e") %>', a: 80, b: 10 }
     ],
     xkey: 'y',
     ykeys: ['a', 'b'],
@@ -164,6 +171,6 @@
     hideHover: true
   });
 // Fin Accumulated //
-</script>
+</script>-->
 
 </body>
