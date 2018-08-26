@@ -94,19 +94,19 @@
               Select Month
             </button>
             <div class="dropdown-menu">
-              <%= link_to 0.months.ago.strftime("%B, %Y"), "", remote: true, class: 'dropdown-item current_month' %>
-              <%= link_to 1.month.ago.strftime("%B, %Y"), "", remote: true, class: 'dropdown-item month_ago' %>
-              <%= link_to 2.months.ago.strftime("%B, %Y"), "", remote: true, class: 'dropdown-item two_months_ago' %>
-              <%= link_to 3.months.ago.strftime("%B, %Y"), "", remote: true, class: 'dropdown-item three_months_ago' %>
-              <%= link_to 4.months.ago.strftime("%B, %Y"), "", remote: true, class: 'dropdown-item four_months_ago' %>
-              <%= link_to 5.months.ago.strftime("%B, %Y"), "", remote: true, class: 'dropdown-item five_months_ago' %>
-              <%= link_to 6.months.ago.strftime("%B, %Y"), "", remote: true, class: 'dropdown-item six_months_ago' %>
-              <%= link_to 7.months.ago.strftime("%B, %Y"), "", remote: true, class: 'dropdown-item seven_months_ago' %>
-              <%= link_to 8.months.ago.strftime("%B, %Y"), "", remote: true, class: 'dropdown-item eight_months_ago' %>
-              <%= link_to 9.months.ago.strftime("%B, %Y"), "", remote: true, class: 'dropdown-item nine_months_ago' %>
-              <%= link_to 10.months.ago.strftime("%B, %Y"), "", remote: true, class: 'dropdown-item ten_months_ago' %>
-              <%= link_to 11.months.ago.strftime("%B, %Y"), "", remote: true, class: 'dropdown-item eleven_months_ago' %>
-              <%= link_to 12.months.ago.strftime("%B, %Y"), "", remote: true, class: 'dropdown-item twelve_months_ago' %>
+              <%= link_to 0.months.ago.strftime("%B %Y"), "", remote: true, class: 'dropdown-item current_month' %>
+              <%= link_to 1.month.ago.strftime("%B %Y"), "", remote: true, class: 'dropdown-item month_ago' %>
+              <%= link_to 2.months.ago.strftime("%B %Y"), "", remote: true, class: 'dropdown-item two_months_ago' %>
+              <%= link_to 3.months.ago.strftime("%B %Y"), "", remote: true, class: 'dropdown-item three_months_ago' %>
+              <%= link_to 4.months.ago.strftime("%B %Y"), "", remote: true, class: 'dropdown-item four_months_ago' %>
+              <%= link_to 5.months.ago.strftime("%B %Y"), "", remote: true, class: 'dropdown-item five_months_ago' %>
+              <%= link_to 6.months.ago.strftime("%B %Y"), "", remote: true, class: 'dropdown-item six_months_ago' %>
+              <%= link_to 7.months.ago.strftime("%B %Y"), "", remote: true, class: 'dropdown-item seven_months_ago' %>
+              <%= link_to 8.months.ago.strftime("%B %Y"), "", remote: true, class: 'dropdown-item eight_months_ago' %>
+              <%= link_to 9.months.ago.strftime("%B %Y"), "", remote: true, class: 'dropdown-item nine_months_ago' %>
+              <%= link_to 10.months.ago.strftime("%B %Y"), "", remote: true, class: 'dropdown-item ten_months_ago' %>
+              <%= link_to 11.months.ago.strftime("%B %Y"), "", remote: true, class: 'dropdown-item eleven_months_ago' %>
+              <%= link_to 12.months.ago.strftime("%B %Y"), "", remote: true, class: 'dropdown-item twelve_months_ago' %>
             </div>
           </div>
         </div>
@@ -126,7 +126,7 @@
               <th scope="col">Remove</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody class="table-body">
             <tr>
             <% @expenses.each do |expense| %>
               <td><%= expense.date.strftime("%d %a") %></td>
@@ -134,11 +134,11 @@
               <td><%= expense.category.name %></td>
               <td><%= number_to_currency(expense.amount) %></td>
               <td><%= expense.transaction_type.name %></td>
-                <td><%= link_to 'Edit', edit_expense_path(expense), class: 'btn btn-sm btn-info' %></td>
-                <td><%= link_to "Remove", expense, method: :delete, data: { confirm: "Are you sure?" }, class: 'btn btn-sm btn-danger' %></td>
-          </tr>
-        </tbody>
-        <% end %>
+              <td><%= link_to 'Edit', edit_expense_path(expense), class: 'btn btn-sm btn-info' %></td>
+              <td><%= link_to "Remove", expense, method: :delete, data: { confirm: "Are you sure?" }, class: 'btn btn-sm btn-danger' %></td>
+            </tr>
+          </tbody>
+            <% end %>
         </table>
       </div>
     <!-- Fin Datos -->

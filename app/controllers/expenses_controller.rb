@@ -72,7 +72,6 @@ class ExpensesController < ApplicationController
   end
 
   def create
-    @expense = Expense.create(expense_params)
   end
 
   def edit
