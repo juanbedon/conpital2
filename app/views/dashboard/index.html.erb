@@ -53,17 +53,16 @@
 <!-- Inicio Gráficos -->
   <div class="container">
     <div class="row">
-      <h6 class="col title">Last 6 months
-        <div id="chartTwo" style="height: 300px; width: 100%; display: inline-block">
-          <%= column_chart "" %>
-        </div>
+
+      <h6 class="col-6 title">Last 6 months
+        <%= column_chart Expense.group_by_month(:date, last: 6, format: "%b %e").count, stacked: true %>
         <span class="d-block text-center"><span class="blue">Purchases</span> — <span class="red">Withdrawals</span> — <span class="purple">Transfers</span> — <span class="green">Payments</span></span>
       </h6>
 
      
-      <h6 class="col title">By day
+      <h6 class="col-6 title">By day
         <div id="chartTwo" style="height: 300px; width: 100%; display: inline-block">
-          <%= column_chart "" %>
+          <%= column_chart Expense.group_by_month(:date, last: 1, format: "%e").count %>
         </div>
         <span class="d-block text-center"><span class="blue">Purchases</span> — <span class="red">Withdrawals</span> — <span class="purple">Transfers</span> — <span class="green">Payments</span></span>
       </h6>
@@ -71,19 +70,18 @@
     </div>
     <div class="row">
 
-      <h6 class="col title">By category
-        <div id="chartThree" style="height: 300px; width: 100%;display: inline-block;">
-          <%= pie_chart "" %>
-        </div>
-        <span class="d-block text-center"><span class="blue">Restaurant</span> — <span class="red">Grocery</span> — <span class="purple">Car</span> — <span class="green">Services</span></span>
-        <span class="d-block text-center"><span class="beige">Home</span> — <span class="yellow">Education</span> — <span class="dark-blue">Fun</span> — <span class="orange">Travel</span></span>
+      <h6 class="col-6 title">By category
+        <%= pie_chart Expense.group(:category).count, donut: true %>
+        <!--<span class="d-block text-center"><span class="blue">Restaurant</span> — <span class="red">Grocery</span> — <span class="purple">Car</span> — <span class="green">Services</span></span>
+        <span class="d-block text-center"><span class="beige">Home</span> — <span class="yellow">Education</span> — <span class="dark-blue">Fun</span> — <span class="orange">Travel</span></span>-->
       </h6>
 
-      <h6 class="col title">Accumulated
-        <div id="chartFour" style="height: 300px; width: 100%;display: inline-block;">
-          <%= area_chart "" %>
-        </div>
-        <span class="d-block text-center"><span class="blue">Current Month</span> — <span class="red">Last Month</span></span>
+      <h6 class="col-6 title">Accumulated
+        <%=  area_chart [
+          {name: "Current Month", data: Expense.group_by_month(:date, last: 1).count},
+          {name: "Last Month", data: Expense.group_by_month(:date, last: 1, current: false).count}
+        ]%>
+        <!--<span class="d-block text-center"><span class="blue">Current Month</span> — <span class="red">Last Month</span></span>-->
       </h6>
 
     </div>
