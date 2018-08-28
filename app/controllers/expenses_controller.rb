@@ -89,10 +89,10 @@ class ExpensesController < ApplicationController
 
   def destroy
 
-    expense = Expense.find(params[:id])
-    expense.destroy
-​    
-    redirect_to expense_path, notice: "Your expense was removed successfully!"
+    @expense = Expense.find(params[:id])
+    @expense.destroy
+
+    redirect_back fallback_location: expenses_path, notice: "Your expense was removed!"
 
   end
 
