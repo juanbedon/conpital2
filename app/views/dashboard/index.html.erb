@@ -69,7 +69,7 @@
     <div class="row">
 
       <h6 class="col-6 title">By category
-        <%= pie_chart Expense.group(:category).count, donut: true %>
+        <%= pie_chart @handler.this_month.joins(:transaction_type).group('transaction_types.name').count, donut: true %>
       </h6>
 
       <h6 class="col-6 title">Accumulated
