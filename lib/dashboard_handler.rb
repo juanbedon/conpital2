@@ -29,6 +29,10 @@ class DashboardHandler
     @expenses.this_month
   end
 
+  def last_month
+    @expenses.last_month
+  end
+
   def current_month_expenses_by_transaction_type
   end
 
