@@ -55,8 +55,7 @@
     <div class="row">
 
       <h6 class="col-6 title">Last 6 months
-        <%= column_chart Expense.group_by_month(:date, last: 6, format: "%b %e").count, stacked: true %>
-        <span class="d-block text-center"><span class="blue">Purchases</span> — <span class="red">Withdrawals</span> — <span class="purple">Transfers</span> — <span class="green">Payments</span></span>
+        <%= column_chart  @handler.last_six_months_expenses_transaction_type_overview.joins(:transaction_type).group('transaction_types.name').group_by_month(:date, last: 6, format: "%b %e").count, stacked: true, colors: ["#379EAB", "#C24543", "#805F83", "#86B40B"] %>
       </h6>
 
      
