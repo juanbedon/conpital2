@@ -56,14 +56,13 @@
 
       <h6 class="col-6 title">Last 6 months
         <%= column_chart  @handler.last_six_months_expenses_transaction_type_overview.joins(:transaction_type).group('transaction_types.name').group_by_month(:date, last: 6, format: "%b %e").count, stacked: true, colors: ["#379EAB", "#C24543", "#805F83", "#86B40B"] %>
+        <!-- colors: Azul, Rojo, Morado, Verde -->
       </h6>
 
      
       <h6 class="col-6 title">By day
-        <div id="chartTwo" style="height: 300px; width: 100%; display: inline-block">
-          <%= column_chart Expense.group_by_month(:date, last: 1, format: "%e").count %>
-        </div>
-        <span class="d-block text-center"><span class="blue">Purchases</span> — <span class="red">Withdrawals</span> — <span class="purple">Transfers</span> — <span class="green">Payments</span></span>
+        <%= column_chart @handler.this_month.joins(:transaction_type).group('transaction_types.name').group_by_day(:date, format: "%e").sum(:amount), colors: ["#379EAB", "#C24543", "#805F83", "#86B40B"] %>
+        <!-- colors: Azul, Rojo, Morado, Verde -->
       </h6>
 
     </div>
@@ -71,8 +70,6 @@
 
       <h6 class="col-6 title">By category
         <%= pie_chart Expense.group(:category).count, donut: true %>
-        <!--<span class="d-block text-center"><span class="blue">Restaurant</span> — <span class="red">Grocery</span> — <span class="purple">Car</span> — <span class="green">Services</span></span>
-        <span class="d-block text-center"><span class="beige">Home</span> — <span class="yellow">Education</span> — <span class="dark-blue">Fun</span> — <span class="orange">Travel</span></span>-->
       </h6>
 
       <h6 class="col-6 title">Accumulated
