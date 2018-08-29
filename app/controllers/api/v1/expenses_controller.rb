@@ -32,7 +32,7 @@ class Api::V1::ExpensesController < ApplicationController
     if @expense.save
       render json: @expense, status: 201
     else
-      render json: { errors: expense.errors }, status: 422
+      render json: { errors: @expense.errors }, status: 422
     end
 
   end
@@ -43,15 +43,20 @@ class Api::V1::ExpensesController < ApplicationController
 
   def update
 
-    expense = Expense.find(params[:id])
-    if expense.user == token_user
-      if expense.update(expense_params)
-        render json: expense, status: 204
+    @expense = Expense.find(params[:id])
+
+    if @expense.user == token_user
+
+      if @expense.update(expense_params)
+        render json: @expense, status: 204
       else
-        render json: { errors: expense.errors }, status: 422
+        render json: { errors: @expense.errors }, status: 422
       end
+
     else
+
       head 403
+
     end
 
   end
