@@ -64,24 +64,25 @@ class ExpensesController < ApplicationController
   end
 
   def show
-    @expense = Expense.find(params[:id])
+    @expenses = Expense.find(params[:id])
   end
 
   def new
-    @expense = Expense.new
+    @expenses = Expense.new
   end
 
   def create
+    @expenses = Expense.create(expense_params)
   end
 
   def edit
-    @expense = Expense.find(params[:id])
+    @expenses = Expense.find(params[:id])
   end
 
   def update
 
-    @expense = Expense.find(params[:id])
-    @expense.update_attributes(expense_params)
+    @expenses = Expense.find(params[:id])
+    @expenses.update_attributes(expense_params)
 
     redirect_to expenses_path, notice: "Your expense was updated!"
 
@@ -89,8 +90,8 @@ class ExpensesController < ApplicationController
 
   def destroy
 
-    @expense = Expense.find(params[:id])
-    @expense.destroy
+    @expenses = Expense.find(params[:id])
+    @expenses.destroy
 
     redirect_back fallback_location: expenses_path, notice: "Your expense was removed!"
 
@@ -99,7 +100,7 @@ class ExpensesController < ApplicationController
   private
 
     def expense_params
-      params.require(:expense).permit(:transaction_type_id, :date, :concept, :category_id, :amount)
+      params.require(:expense).permit(:transaction_type_id, :date, :concept, :category_id, :amount).merge(user_id: current_user)
     end
 
 end
