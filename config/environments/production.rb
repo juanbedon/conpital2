@@ -32,7 +32,7 @@ config.webpacker.check_yarn_integrity = false
 
   # Do not fallback to assets pipeline if a precompiled asset is missed.
   config.serve_static_assets = true
-  config.assets.compile = true
+  config.assets.compile = false
   config.assets.digest = true
   config.assets.paths << Rails.root.join('node_modules')
 
