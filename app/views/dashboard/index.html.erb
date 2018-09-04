@@ -19,7 +19,7 @@
             <%= link_to "Expenses", expenses_path, class: "nav-link #{yield(:expenses_active)}" %>
           </li>
           <% if signed_in? %>
-            <li class="nav-item"><%= link_to "Log Out", destroy_user_session_path, method: :delete, class: "nav-link" %></li>
+            <li class="nav-item"><%= link_to "Log Out", destroy_user_session_path, method: :delete, redirect_to: root_path, class: "nav-link" %></li>
           <% else %>
             <li class="nav-item">
               <%= link_to "Log In", new_user_session_path, class: "nav-link #{yield(:login_active)}" %>
