@@ -33,13 +33,4 @@ class DashboardHandler
     @expenses.last_month
   end
 
-  def current_month_expenses_by_transaction_type
-  end
-
-  def current_month_expenses_by_category
-  end
-
-  def accumulated_against_last_month
-  end
-
 end
