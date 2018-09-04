@@ -12,4 +12,8 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def after_sign_out_path_for(current_user)
+    dashboard_index_path
+  end
+
 end
