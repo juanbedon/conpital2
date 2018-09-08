@@ -7,7 +7,7 @@ Rails.application.routes.draw do
 
   devise_for :users
 
-  namespace :api, defaults: { format: :json } do
+  namespace :api, defaults: { format: :json }, path: '/api' do
     namespace :v1 do
       resources :expenses, except: [:show, :edit, :new]
     end
