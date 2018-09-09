@@ -16,3 +16,4 @@
 //= require chartkick
 //= require bootstrap
 //= require turbolinks
+//= require_tree .
