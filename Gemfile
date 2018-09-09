@@ -43,6 +43,7 @@ gem 'annotate'
 gem 'chartkick'
 gem 'groupdate'
 gem 'webpacker', '~> 3.5'
+gem 'therubyracer'
 
 gem 'rails_12factor', group: :production
 
