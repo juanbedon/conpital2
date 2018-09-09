@@ -1,5 +1,5 @@
 
-# Inicio Filtro Transaction Type //
+/*# Inicio Filtro Transaction Type //*/
 $(document).ready ->
   console.log 'hola mundo'
   $('.transaction-type').on 'click', (e) ->
@@ -16,8 +16,8 @@ $(document).ready ->
         $('body').html response
         return
     return
-  # Fin Filtro Transaction Type //
-  # Inicio Filtro Category //
+  /*# Fin Filtro Transaction Type //
+  # Inicio Filtro Category //*/
   $('.category').on 'click', (e) ->
     filter = @id
     param = 'category': filter
@@ -32,8 +32,8 @@ $(document).ready ->
         $('body').html response
         return
     return
-  # Fin Filtro Category //
-  # Inicio Filtro Mes //
+  /*# Fin Filtro Category //
+  # Inicio Filtro Mes //*/
   $('.current_month').on 'click', (e) ->
     filter = @id
     param = 'current_month': filter
@@ -217,4 +217,4 @@ $(document).ready ->
         return
     return
   return
-# Fin Filtro Mes //
+/*# Fin Filtro Mes //*/
