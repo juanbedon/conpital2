@@ -33,4 +33,8 @@ class DashboardHandler
     @expenses.last_month
   end
 
+<<<<<<< HEAD:app/lib/dashboard_handler.rb
 end
+=======
+end
+>>>>>>> cddfbd28bc5566148a828ba7cf53c513b5deac2c:lib/dashboard_handler.rb
