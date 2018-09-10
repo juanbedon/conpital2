@@ -1,3 +1,4 @@
+
 require_relative 'boot'
 
 require 'rails/all'
@@ -12,11 +13,7 @@ module Conpital
     config.load_defaults 5.1
     config.autoload_paths += Dir["#{config.root}/lib/**/"]
     config.autoload_paths += Dir["#{config.root}/vendor/lib/**/"]
-<<<<<<< HEAD
     config.autoload_paths << "#{Rails.root}/app/lib"
-=======
-    config.eager_load_paths << Rails.root.join('lib')
->>>>>>> cddfbd28bc5566148a828ba7cf53c513b5deac2c
 
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
